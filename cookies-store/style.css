@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    background-image: url("fundo.png");
+    background-size: 700px;
+    background-repeat: repeat;
+}
+
+.container-pai {
+    display: flex;
+    align-items: center;
+    height: auto;
+    width: 30%;
+    flex-direction: column;
+
+    background-color: #f3e2c7; /* creme de cookie */
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.25);
+    border-radius: 15px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    flex-direction: column;
+    padding: 30px;
+    gap: 30px;
+    border-radius: 10px;
+}
+
+.label-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff8ef; /* creme claro */
+    width: 100%;
+    height: auto;
+}
+
+.label-container:focus-within label {
+    transform: translateY(-20px);
+}
+
+label {
+    transition: transform 0.4s ease;
+    position: absolute;
+    padding-left: 10px;
+    transform: translateY(15px);
+    color: #6b3e26; /* marrom */
+}
+
+input {
+    border-color: #c7a17a;
+    padding: 5px 30px;
+    height: 50px;
+    border-style: solid;
+    border-radius: 0;
+    outline: none;
+}
+
+input:focus {
+    border-color: #d89b5c;
+}
+
+
+.label-bottom {
+    position: relative;
+    transform: translateY(-14px);
+    padding-left: 35%;
+    color: aliceblue;
+}
+
+.title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 0px;
+    border-bottom: 2px solid #8b5e3c; /* marrom cookie */
+    color: #5a3825;
+}
+
+
+button {
+    width: 100%;
+    height: 40px;
+    border: 2px solid transparent;
+    background-color: #d89b5c;
+    color: white;
+    border-radius: 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #fff8ef;
+    color: #8b5e3c;
+    border: 2px solid #8b5e3c;
+}
+.bottom {
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #8b5e3c; /* chocolate */
+    color: white;
+    border-radius: 0px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}

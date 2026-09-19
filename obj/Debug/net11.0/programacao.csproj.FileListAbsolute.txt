@@ -1,0 +1,4 @@
+C:\Users\Guilherme\guilherme_pc\programacao\obj\Debug\net11.0\programacao.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Guilherme\guilherme_pc\programacao\obj\Debug\net11.0\programacao.AssemblyInfoInputs.cache
+C:\Users\Guilherme\guilherme_pc\programacao\obj\Debug\net11.0\programacao.AssemblyInfo.cs
+C:\Users\Guilherme\guilherme_pc\programacao\obj\Debug\net11.0\programacao.csproj.CoreCompileInputs.cache

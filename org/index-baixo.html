@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Exemplo: Site BAIXO Atrito — Checkout Rápido</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #fff;
+      --accent: #0b63d6;
+      --muted: #6b7280
+    }
+
+    body {
+      font-family: Inter, system-ui, Arial, sans-serif;
+      background: var(--bg);
+      margin: 0;
+      color: #111
+    }
+
+    header {
+      background: linear-gradient(90deg, #0b63d6 0%, #3b82f6 100%);
+      color: #fff;
+      padding: 18px 20px
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 16px
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 6px 18px rgba(11, 99, 214, 0.08)
+    }
+
+    h1,
+    h2 {
+      margin: 0 0 10px
+    }
+
+    p {
+      margin: 0 0 10px;
+      color: var(--muted)
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      align-items: center
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff
+    }
+
+    .note {
+      font-size: 13px;
+      color: #374151
+    }
+
+    .site-example {
+      border: 1px dashed #e6eefb;
+      padding: 14px;
+      border-radius: 8px;
+      background: #fff
+    }
+
+    .hero {
+      height: 160px;
+      border-radius: 8px;
+      background: linear-gradient(120deg, #fff 0, #eef3ff 60%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--accent)
+    }
+
+    .product {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-top: 14px;
+      flex-wrap: wrap
+    }
+
+    .img {
+      width: 220px;
+      height: 160px;
+      background: #e6eefb;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent)
+    }
+
+    .meta {
+      flex: 1;
+      min-width: 260px
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: 700;
+      color: #111
+    }
+
+    .muted {
+      color: #6b7280;
+      font-size: 14px
+    }
+
+    @media(max-width:900px) {
+      .product {
+        flex-direction: column
+      }
+
+      .img {
+        width: 100%;
+        height: 160px
+      }
+    }
+
+    label {
+      display: block;
+      margin: 8px 0 6px;
+      font-size: 13px
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      box-sizing: border-box
+    }
+
+    .small {
+      max-width: 520px
+    }
+
+    .muted-small {
+      font-size: 12px;
+      color: #6b7280;
+      line-height: 1.3
+    }
+
+    .inline {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .success {
+      color: #065f46;
+      font-weight: 700;
+    }
+
+    .info {
+      color: #1e3a8a;
+    }
+
+    footer {
+      text-align: center;
+      padding: 18px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .notice {
+      background: #eef7ff;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 12px;
+      color: #0b63d6;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <strong>Exemplo — Baixo Atrito</strong>
+        <div style="font-size:13px;opacity:.9">Fluxo simples, transparente e rápido.</div>
+      </div>
+      <nav class="nav">
+        <a class="btn btn-primary" href="#product">Comprar</a>
+        <!-- Link de cálculo de frete (abre Correios em nova aba) -->
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card" id="overview">
+      <h2>Como usar</h2>
+      <p class="note">Versão de baixo atrito: frete estimado na página, checkout curto (3 campos), opção de pagamento
+        rápido e sem pop-ups.</p>
+      <div class="notice">Dica: para demonstração, clique em "Comprar agora" — o checkout simulado será muito rápido.
+      </div>
+    </section>
+
+    <div class="card site-example" id="product" style="margin-top:16px">
+      <div class="hero">Produto em destaque — foco na tarefa</div>
+
+      <div class="product" style="margin-top:14px">
+        <div class="img" aria-hidden="true">Imagem</div>
+        <div class="meta">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap">
+            <div>
+              <div style="font-weight:700">Tênis Running Y — Edição Funcional</div>
+              <div class="muted">Material leve • Seguro na entrega</div>
+            </div>
+            <div class="price">R$ 199,00</div>
+          </div>
+
+          <p class="muted-small" style="margin-top:8px">Resumo curto. CTA visível, informações de frete e opções de
+            pagamento simples.</p>
+
+          <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <button id="buy-now" class="btn btn-primary">Comprar agora (one-click)</button>
+            <button id="open-checkout" class="btn" style="background:#fff;border-radius:8px;color:var(--accent)">Abrir
+              checkout (3 passos)</button>
+            <span id="shipping-estimate" class="muted-small" style="margin-left:6px">Frete estimado: <strong
+                id="shipping-value">R$ 12,90</strong></span>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="cep-input">Calcular frete por CEP</label>
+            <div style="display:flex;gap:8px;max-width:360px">
+              <input id="cep-input" placeholder="00000-000" />
+              <button id="calc-cep" class="btn btn-primary" style="padding:8px 10px">Calcular</button>
+            </div>
+            <div id="cep-result" class="muted-small" style="margin-top:8px"></div>
+          </div>
+
+          <div style="margin-top:14px" class="muted-small">
+            Por que funciona: transparência sobre frete, checkout curto, feedback imediato e opções de pagamento
+            rápidas.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- checkout curto (invisível até abrir) -->
+    <div class="card" id="checkout-card" style="margin-top:16px;display:none">
+      <h2>Checkout rápido</h2>
+      <form id="quick-checkout" class="small" onsubmit="event.preventDefault(); handleQuickCheckout();">
+        <label>Nome *</label>
+        <input id="qc-name" required />
+
+        <label style="margin-top:8px">Endereço (CEP + rua mínima) *</label>
+        <input id="qc-address" required placeholder="CEP - Rua, Nº" />
+
+        <label style="margin-top:8px">Pagamento *</label>
+        <select id="qc-pay" required>
+          <option value="">Escolha...</option>
+          <option>Pix (one-click)</option>
+          <option>Cartão salvo (one-click)</option>
+        </select>
+
+        <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+          <button class="btn btn-primary" type="submit">Confirmar e pagar</button>
+          <button id="qc-cancel" class="btn" type="button" style="background:#fff;border-radius:8px">Cancelar</button>
+        </div>
+      </form>
+
+      <div id="qc-feedback" style="margin-top:12px;"></div>
+    </div>
+
+    <section class="card" style="margin-top:18px">
+      <h2>Notas técnicas</h2>
+      <p class="muted">Esta versão foca em minimizar passos e dar feedback claro ao usuário. Os botões são grandes, sem
+        pop-ups, e o cálculo de frete é mostrado na própria página.</p>
+    </section>
+  </main>
+
+  <footer>
+    Projeto de demonstração — Versão baixo atrito.
+  </footer>
+
+  <script>
+    // comportamento simples e claro (baixo atrito)
+
+    // buy-now = one-click simulated
+    document.getElementById('buy-now').addEventListener('click', function (e) {
+      e.preventDefault();
+      // simulate one-click payment flow with minimal data
+      const saved = localStorage.getItem('qc-fast') || null;
+      if (saved) {
+        // if user previously stored a minimal "one-click" token, simulate instant purchase
+        alert('Compra rápida efetuada (simulação) — obrigado!');
+        showQCFeedback('Compra rápida efetuada (simulação)', true);
+        return;
+      }
+      // if not, open quick checkout for first-time
+      openQuickCheckout();
+    });
+
+    // open checkout button
+    document.getElementById('open-checkout').addEventListener('click', function (e) {
+      e.preventDefault();
+      openQuickCheckout();
+    });
+
+    function openQuickCheckout() {
+      document.getElementById('checkout-card').style.display = 'block';
+      document.getElementById('qc-name').focus();
+      // smooth scroll to checkout
+      document.getElementById('checkout-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // quick checkout submit
+    function handleQuickCheckout() {
+      const name = document.getElementById('qc-name').value.trim();
+      const addr = document.getElementById('qc-address').value.trim();
+      const pay = document.getElementById('qc-pay').value;
+      if (!name || !addr || !pay) {
+        showQCFeedback('Preencha todos os campos obrigatórios.', false);
+        return;
+      }
+      // simulate success and offer to remember for one-click next time
+      showQCFeedback('Compra efetuada (simulação) — obrigado!', true);
+      // store a simple "one-click" flag (simulação)
+      localStorage.setItem('qc-fast', JSON.stringify({ name, addr, pay }));
+      // after success, hide checkout in a moment
+      setTimeout(function () { document.getElementById('checkout-card').style.display = 'none'; }, 900);
+    }
+
+    document.getElementById('qc-cancel').addEventListener('click', function () {
+      document.getElementById('checkout-card').style.display = 'none';
+      showQCFeedback('Checkout cancelado.', false);
+    });
+
+    function showQCFeedback(msg, success) {
+      const el = document.getElementById('qc-feedback');
+      el.textContent = msg;
+      el.style.color = success ? '#065f46' : '#b91c1c';
+    }
+
+    // calculate shipping by CEP (very simple simulation, not calling any API)
+    document.getElementById('calc-cep').addEventListener('click', function (e) {
+      e.preventDefault();
+      const cep = (document.getElementById('cep-input').value || '').replace(/\D/g, '');
+      const out = document.getElementById('cep-result');
+      if (!cep || cep.length < 8) {
+        out.textContent = 'CEP inválido. Use o formato 00000-000.';
+        out.style.color = '#b91c1c';
+        return;
+      }
+      // simple rule: inner-city cheaper, remote more expensive (fake logic)
+      const lastDigit = parseInt(cep.slice(-1), 10);
+      let price = 12.90;
+      if (lastDigit >= 7) price = 29.90;
+      else if (lastDigit >= 4) price = 19.90;
+      document.getElementById('shipping-value').textContent = 'R$ ' + price.toFixed(2);
+      out.textContent = 'Frete estimado atualizado para ' + 'R$ ' + price.toFixed(2) + '.';
+      out.style.color = '#065f46';
+    });
+
+    // ensure normal scroll behavior (no fake blockers)
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Accessibility: focus visible for keyboard users
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Tab') document.body.classList.add('show-focus');
+    });
+
+    // optional: offer to clear one-click data for demo
+    (function addClearOneClick() {
+      const btn = document.createElement('button');
+      btn.textContent = 'Limpar one-click';
+      btn.className = 'btn';
+      btn.style.marginLeft = '8px';
+      btn.style.background = '#fff';
+      btn.style.color = 'var(--accent)';
+      btn.addEventListener('click', function () {
+        localStorage.removeItem('qc-fast');
+        alert('Dados de compra rápida removidos (simulação).');
+      });
+      document.querySelector('.nav').appendChild(btn);
+    })();
+  </script>
+</body>
+
+</html>

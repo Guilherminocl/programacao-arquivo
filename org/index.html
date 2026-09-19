@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Exemplo: Site ALTO Atrito — Cadastro obrigatório</title>
+  <style>
+    :root { --bg:#f5f7fb; --card:#fff; --accent:#0b63d6; --muted:#6b7280 }
+    body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);margin:0;color:#111}
+    header{background:linear-gradient(90deg,#0b63d6 0%,#3b82f6 100%);color:#fff;padding:18px 20px}
+    .wrap{max-width:1100px;margin:20px auto;padding:0 16px}
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 6px 18px rgba(11,99,214,0.08)}
+    h1,h2{margin:0 0 10px}
+    p{margin:0 0 10px;color:var(--muted)}
+    .nav{display:flex;gap:8px;position:relative}
+    .btn{display:inline-block;padding:10px 14px;border-radius:8px;text-decoration:none;cursor:pointer}
+    .btn-primary{background:#111;color:#fff}
+    .note{font-size:13px;color:#374151}
+    .site-example{border:1px dashed #e6eefb;padding:14px;border-radius:8px;background:#fff}
+    .hero{height:160px;border-radius:8px;background:linear-gradient(120deg,#fff 0,#eef3ff 60%);display:flex;align-items:center;justify-content:center;font-weight:700;color:#0b63d6}
+    .product{display:flex;gap:14px;align-items:flex-start;margin-top:14px}
+    .img{width:220px;height:160px;background:#e6eefb;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#0b63d6}
+    .meta{flex:1}
+    .price{font-size:22px;font-weight:700;color:#111}
+    .muted{color:#6b7280;font-size:14px}
+    .high .hero{height:260px;background:linear-gradient(120deg,#fff 0,#ffefd5 60%);font-size:22px}
+    .high .popup{position:fixed;right:20px;bottom:20px;background:#fff;padding:12px;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.12);z-index:9999}
+    @media(max-width:900px){.product{flex-direction:column}.img{width:100%;height:160px}}
+    label{display:block;margin:8px 0 6px;font-size:13px}
+    input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e5e7eb;box-sizing:border-box}
+    .small{max-width:420px}
+    .muted-small{font-size:12px;color:#6b7280;line-height:1.3}
+    .actions{margin-top:12px}
+
+    /* RUIM extras */
+    .nav a { position: relative; padding: 8px 10px; transition: background .15s; color: #fff; }
+    .nav a::after { content: attr(data-tip); position:absolute; left:0; top:36px; background:#fff; color:#111; padding:6px 8px; border-radius:6px; font-size:12px; opacity:0; transform:translateY(-6px); transition: all .12s ease; pointer-events:none; white-space:nowrap;}
+    .nav a:hover::after { opacity:1; transform:translateY(0); }
+    .nav-blocker { position:absolute; left:0; right:0; height:56px; top:0; pointer-events:none; z-index:50; }
+
+    .fake-scroll { height:120px; overflow:auto; border:1px dashed #e6eefb; padding:8px; background:#fff; margin-top:8px; }
+    .fake-inner { height:600px; padding-right:20px }
+
+    .stuck-modal { position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); background:#fff; padding:18px; border-radius:10px; box-shadow:0 10px 40px rgba(0,0,0,0.3); z-index:9998; width:90%; max-width:520px; }
+    .overlay-block { position:fixed; inset:0; background:rgba(0,0,0,0.35); z-index:9997; }
+
+    a.broken { color:#0b63d6; text-decoration:underline; cursor: pointer; }
+    .looks-active { box-shadow: 0 6px 18px rgba(11,99,214,0.12); }
+
+    /* form layout */
+    .two-cols { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .error { color:#b91c1c; font-size:13px; margin-top:6px; }
+  </style>
+</head>
+<body>
+  <div class="nav-blocker" id="nav-blocker" aria-hidden="true"></div>
+
+  <header>
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;position:relative">
+      <div>
+        <strong>Exemplo — Alto Atrito (Cadastro Obrigatório)</strong>
+        <div style="font-size:13px;opacity:.9">Versão difícil — demonstra fricção num fluxo de compra</div>
+      </div>
+      <nav class="nav" id="top-nav" style="position:relative">
+        <a class="btn btn-primary" href="#high" data-tip="Ir para Site A">Site A — Alto Atrito</a>
+         <a class="btn" href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" style="background:#fff;border-radius:8px;color:var(--accent)">Calcular frete (Correios)</a>
+        <a class="btn" href="#!" id="fake-help" data-tip="Ajuda" style="background:transparent;border:1px solid rgba(255,255,255,0.12);margin-left:8px;color:#fff">Ajuda</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="overview" class="card">
+      <h2>Observação</h2>
+      <p class="note">Esta página está propositalmente cheia de fricção: pop-ups, links quebrados e formulários longos. O objetivo é demonstrar problemas de usabilidade.</p>
+
+      <div style="margin-top:10px">
+        <strong>Barra de rolagem (aparenta funcionar, mas está travada):</strong>
+        <div class="fake-scroll" id="fake-scroll-1" aria-label="Scroll travado">
+          <div class="fake-inner">Muitas linhas para forçar a barra — porém o scroll foi bloqueado por script.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="card high" id="high" style="margin-top:16px">
+      <h2>Site A — Aparência forte, ALTO atrito</h2>
+      <p class="muted">Design chamativo; aqui o usuário é forçado a se cadastrar no momento da compra.</p>
+
+      <div class="site-example high" style="margin-top:12px">
+        <div class="hero">HERO: grande imagem, CTA confuso</div>
+
+        <div class="product" style="margin-top:14px">
+          <div class="img">Imagem grande</div>
+          <div class="meta">
+            <div style="display:flex;justify-content:space-between;align-items:start">
+              <div>
+                <div style="font-weight:700">Tênis Running XZ — Edição Visual</div>
+                <div class="muted">Coleção limitada • Frete só no checkout</div>
+              </div>
+              <div class="price">R$ 249,00</div>
+            </div>
+
+            <p class="muted-small">Descrição longa e confusa. O botão "Adicionar ao carrinho" abre um cadastro extenso.</p>
+
+            <div class="actions">
+              <button class="btn btn-primary looks-active" id="btn-add">Adicionar ao carrinho</button>
+              <a class="broken" data-broken style="margin-left:10px">Ver medidas</a>
+            </div>
+
+            <div style="margin-top:14px" class="muted-small">
+              Comportamentos propositalmente problemáticos:
+              <ul>
+                <li>Frete só aparece no checkout</li>
+                <li>Cadastro obrigatório com muitos campos</li>
+                <li>Modal que exige confirmação extra (passo 2)</li>
+                <li>Alguns links estão propositalmente quebrados</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px" class="note small">
+          <strong>Checkout (simulado):</strong>
+          <div id="checkout-high" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="card" style="margin-top:18px">
+      <h2>Explicação</h2>
+      <p class="muted">Ao clicar em "Adicionar ao carrinho" o usuário verá um cadastro longo e exigente (intencional). Você pode demonstrar como isso aumenta desistências.</p>
+    </section>
+  </main>
+
+  <!-- Modal de cadastro (alto atrito) -->
+  <div id="overlay" class="overlay-block" style="display:none;"></div>
+  <div id="reg-modal" class="stuck-modal" style="display:none;">
+    <strong>Cadastro obrigatório para continuar</strong>
+    <p class="muted-small" style="margin-top:8px">Preencha todos os campos marcados com * — sem cadastro não é possível finalizar.</p>
+
+    <form id="registration-form" class="small" style="margin-top:10px">
+      <div class="two-cols">
+        <div>
+          <label>Nome completo *</label>
+          <input id="nome" name="nome" required />
+        </div>
+        <div>
+          <label>E-mail *</label>
+          <input id="email" name="email" type="email" required />
+        </div>
+      </div>
+
+      <div class="two-cols" style="margin-top:8px">
+        <div>
+          <label>CPF *</label>
+          <input id="cpf" name="cpf" required placeholder="000.000.000-00" />
+        </div>
+        <div>
+          <label>Telefone *</label>
+          <input id="tel" name="tel" required placeholder="(00) 00000-0000" />
+        </div>
+      </div>
+
+      <div style="margin-top:8px">
+        <label>Data de nascimento *</label>
+        <input id="dob" name="dob" type="date" required />
+      </div>
+
+      <div style="margin-top:8px">
+        <label>Endereço completo *</label>
+        <input id="endereco" name="endereco" required placeholder="Rua, Número, Bairro" />
+      </div>
+
+      <div class="two-cols" style="margin-top:8px">
+        <div>
+          <label>CEP *</label>
+          <input id="cep" name="cep" required />
+        </div>
+        <div>
+          <label>Complemento</label>
+          <input id="comp" name="comp" />
+        </div>
+      </div>
+
+      <div style="margin-top:8px">
+        <label>Método de pagamento *</label>
+        <select id="pay" name="pay" required>
+          <option value="">Escolha...</option>
+          <option>Cartão</option>
+          <option>Pix</option>
+          <option>Boleto</option>
+        </select>
+      </div>
+
+      <div style="margin-top:8px">
+        <label>Captcha: digite <strong>AGUARDE</strong> *</label>
+        <input id="captcha" name="captcha" required placeholder="Texto exibido" />
+        <div id="captcha-hint" class="muted-small">(Captcha intencional com texto confuso)</div>
+      </div>
+
+      <div style="margin-top:8px">
+        <label><input id="terms" type="checkbox" /> Aceito os termos e condições *</label>
+      </div>
+
+      <div style="margin-top:8px">
+        <label><input id="newsletter" type="checkbox" /> Quero receber ofertas (newsletter)</label>
+      </div>
+
+      <!-- área onde o passo extra aparecerá se a validação falhar -->
+      <div id="extra-step" style="display:none;margin-top:10px">
+        <hr style="margin:8px 0">
+        <div class="muted-small">Passo extra: precisamos confirmar sua identidade</div>
+        <div style="margin-top:8px">
+          <label>RG / Documento *</label>
+          <input id="rg" name="rg" />
+        </div>
+        <div style="margin-top:8px">
+          <label><input id="confirm-identity" type="checkbox" /> Confirmo que os dados são verdadeiros *</label>
+        </div>
+      </div>
+
+      <div id="form-error" class="error" style="display:none"></div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <button id="submit-reg" class="btn btn-primary" type="submit">Enviar cadastro e continuar</button>
+        <button id="cancel-reg" class="btn" type="button" style="background:#fff;border-radius:8px">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Pop-up demonstrativo -->
+  <div id="intrusive-popup" class="high popup" style="display:none;">
+    <strong>Oferta!</strong>
+    <div style="margin-top:8px">Cupom aplicado — mas o checkout ainda pode falhar.</div>
+    <div style="margin-top:8px"><button class="btn btn-primary" id="close-intrusive">Fechar</button></div>
+  </div>
+
+  <script>
+    // comportamento RUIM: bloqueia scroll nas "fake-scroll"
+    function lockFakeScroll(el) {
+      if (!el) return;
+      el.addEventListener('wheel', function(ev){ ev.preventDefault(); }, {passive:false});
+      el.addEventListener('touchmove', function(ev){ ev.preventDefault(); }, {passive:false});
+      el.addEventListener('scroll', function(){ el.scrollTop = 0; });
+    }
+    lockFakeScroll(document.getElementById('fake-scroll-1'));
+
+    // nav "pisca" e bloqueia cliques temporariamente
+    const navBlocker = document.getElementById('nav-blocker');
+    function positionNavBlocker() {
+      const header = document.querySelector('header .wrap');
+      if (!header || !navBlocker) return;
+      const rect = header.getBoundingClientRect();
+      navBlocker.style.top = rect.top + 'px';
+      navBlocker.style.left = rect.left + 'px';
+      navBlocker.style.width = rect.width + 'px';
+      navBlocker.style.height = rect.height + 'px';
+      navBlocker.style.pointerEvents = 'auto';
+      navBlocker.style.background = 'transparent';
+    }
+    positionNavBlocker();
+    window.addEventListener('resize', positionNavBlocker);
+    setInterval(function(){
+      if (!navBlocker) return;
+      navBlocker.style.pointerEvents = 'auto';
+      setTimeout(function(){ navBlocker.style.pointerEvents = 'none'; }, 180);
+    }, 950);
+
+    // pop-up intrusivo ao carregar
+    window.addEventListener('load', function(){
+      setTimeout(function(){
+        document.getElementById('intrusive-popup').style.display = 'block';
+      }, 600);
+    });
+    document.getElementById('close-intrusive').addEventListener('click', function(){ document.getElementById('intrusive-popup').style.display='none'; });
+
+    // links "quebrados"
+    document.querySelectorAll('[data-broken], a.broken, #fake-help').forEach(function(el){
+      el.addEventListener('click', function(e){
+        e.preventDefault();
+        alert('Este link está propositalmente quebrado (exemplo de atrito).');
+      });
+    });
+
+    // fluxo do botão "Adicionar ao carrinho" -> abre modal de cadastro (alto atrito)
+    document.getElementById('btn-add').addEventListener('click', function(e){
+      e.preventDefault();
+      openRegistrationModal();
+    });
+
+    // abrir modal (overlay bloqueador)
+    function openRegistrationModal(){
+      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('reg-modal').style.display = 'block';
+      // foco no primeiro campo
+      setTimeout(function(){ document.getElementById('nome').focus(); }, 120);
+    }
+
+    document.getElementById('cancel-reg').addEventListener('click', function(){
+      // comport. ruim: cancelar fecha modal mas mantém aviso e impede prosseguir (simulação)
+      document.getElementById('reg-modal').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+      alert('Cancelado. Você não pode comprar sem cadastro — exemplo de fricção.');
+    });
+
+    // comportamento do formulário: validação em 2 etapas para aumentar fricção
+    const form = document.getElementById('registration-form');
+    let step = 1; // 1 = primeiro envio, 2 = exige passo extra
+    form.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      document.getElementById('form-error').style.display = 'none';
+      // coleta simples
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const cpf = document.getElementById('cpf').value.trim();
+      const tel = document.getElementById('tel').value.trim();
+      const cep = document.getElementById('cep').value.trim();
+      const pay = document.getElementById('pay').value;
+      const captcha = document.getElementById('captcha').value.trim();
+      const terms = document.getElementById('terms').checked;
+
+      // valida básico
+      if (!nome || !email || !cpf || !tel || !cep || !pay || !captcha || !terms) {
+        showFormError('Por favor preencha todos os campos obrigatórios e aceite os termos.');
+        return;
+      }
+
+      // passo 1: simulamos falha de captcha/validação para forçar passo extra
+      if (step === 1) {
+        // mostra erro e revela passo extra
+        showFormError('Erro: validação do captcha falhou. Será necessário confirmar identidade (passo extra).');
+        document.getElementById('extra-step').style.display = 'block';
+        // scroll suave dentro do modal para a parte nova
+        document.getElementById('rg').scrollIntoView({behavior:'smooth', block:'center'});
+        step = 2;
+        return;
+      }
+
+      // passo 2: exige RG e checkbox de confirmação
+      if (step === 2) {
+        const rg = (document.getElementById('rg') || {}).value || '';
+        const confirmIdentity = (document.getElementById('confirm-identity') || {}).checked;
+        if (!rg || !confirmIdentity) {
+          showFormError('Precisamos do RG e da confirmação de identidade para prosseguir.');
+          return;
+        }
+        // simula envio com erro intermitente (muita fricção): 50% chance de falha "servidor"
+        if (Math.random() < 0.5) {
+          showFormError('Erro 500: falha no servidor ao processar cadastro — por favor tente novamente.');
+          return;
+        }
+        // sucesso (simulado)
+        alert('Cadastro enviado (simulação). Agora você pode finalizar o checkout — mas lembre-se: esta é a versão RUIM.');
+        // exibir o checkout (simulado) abaixo do produto
+        renderHighCheckoutAfterRegistration();
+        // mantém modal aberto como "ruim" (poderíamos fechar, mas deixamos um pouco confuso)
+        document.getElementById('reg-modal').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+      }
+    });
+
+    function showFormError(msg) {
+      const el = document.getElementById('form-error');
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    // função que renderiza o checkout (após cadastro)
+    function renderHighCheckoutAfterRegistration(){
+      const target = document.getElementById('checkout-high');
+      target.innerHTML = `<form class='small' onsubmit='event.preventDefault(); alert("Formulário enviado (simulação) — muitos passos = alta fricção");'>
+        <label>Nome no cartão *</label><input required />
+        <label>CPF do comprador *</label><input required />
+        <label>Endereço para nota fiscal *</label><input required />
+        <label>CEP *</label><input required />
+        <label>Método de pagamento (redireciona a 3ª parte)</label>
+        <select required><option>Cartão</option><option>Boleto</option><option>Transferência</option></select>
+        <div style='margin-top:8px'><button class='btn btn-primary' type='submit'>Finalizar compra (ativo mas sujeito a erro)</button></div>
+      </form>`;
+    }
+
+    // prevenir contextmenu nas imagens (pequena irritação)
+    document.querySelectorAll('.img').forEach(function(img){
+      img.addEventListener('contextmenu', function(e){ e.preventDefault(); alert('Salvar imagem bloqueado (exemplo de fricção)'); });
+    });
+
+    // impedir que modal seja fechado com ESC ou clicando no overlay (intencional)
+    document.getElementById('overlay').addEventListener('click', function(e){ /* intencionalmente vazio */ });
+    window.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        // nada: bloqueado intencionalmente
+      }
+    });
+
+  </script>
+
+  <!-- aviso -->
+  <!-- NOTA: este arquivo foi intencionalmente alterado para demonstrar ALTO ATRITO (formulário de cadastro / passos extras). -->
+</body>
+</html>

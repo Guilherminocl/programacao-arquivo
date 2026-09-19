@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    position:ab;
+    align-items:center;
+    align-content:center;
+    text-align:center;
+}
+
+.class {
+    display: flex;
+    flex-direction: column;
+    -ms-flex-align: center;
+}
+
+.calculadora{
+    width: 50%;
+    height: auto;
+    background:antiquewhite;
+    
+}
+
+.grid {
+    display: grid;
+    background:red;
+}
+
+.grid-rows-1, .grid-rows-2, .grid-rows-3, .grid-rows-4 {
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+button{
+    background-color: aqua;
+    border: none;
+    margin: 3%;
+    width: auto;
+    padding:40%;
+    height: auto;
+    ho:inherit;
+}
+
+button. hover {
+    background:red;
+};

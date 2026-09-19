@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Keiko Cookies</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🍪 Keiko Cookies</h1>
+
+<div class="form">
+
+<input id="nome" placeholder="Seu nome">
+<input id="telefone" placeholder="WhatsApp">
+
+<h3>Escolha seus cookies</h3>
+
+<div id="cardapio"></div>
+
+<h3>Carrinho</h3>
+<div id="carrinho"></div>
+
+<textarea id="obs" placeholder="Observações"></textarea>
+
+<button onclick="fazerPedido()">
+💬 Fazer Pedido
+</button>
+
+</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

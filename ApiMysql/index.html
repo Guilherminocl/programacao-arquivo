@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Produtos</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        input{
+            margin: 5px;
+            padding: 8px;
+        }
+
+        button{
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        table{
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td{
+            border: 1px solid #ccc;
+        }
+
+        th, td{
+            padding: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Cadastro de Produtos</h1>
+
+    <div>
+
+        <input
+            type="text"
+            id="nome"
+            placeholder="Nome"
+        >
+
+        <input
+            type="number"
+            id="preco"
+            placeholder="Preço"
+            step="0.01"
+        >
+
+        <button onclick="salvarProduto()">
+            Salvar
+        </button>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Preço</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="tabelaProdutos">
+
+        </tbody>
+
+    </table>
+
+    <script>
+
+        const api = "http://localhost:5062";
+
+        async function carregarProdutos(){
+
+            const resposta =
+                await fetch(`${api}/produtos`);
+
+            const produtos =
+                await resposta.json();
+
+            let html = "";
+
+            produtos.forEach(produto => {
+
+                html += `
+                    <tr>
+
+                        <td>${produto.id}</td>
+
+                        <td>${produto.nome}</td>
+
+                        <td>
+                            R$ ${produto.preco}
+                        </td>
+
+                    </tr>
+                `;
+
+            });
+
+            document.getElementById("tabelaProdutos")
+                .innerHTML = html;
+        }
+
+        async function salvarProduto(){
+
+            const nome =
+                document.getElementById("nome").value;
+
+            const preco =
+                parseFloat(
+                    document.getElementById("preco").value
+                );
+
+            const produto = {
+                nome,
+                preco
+            };
+
+            await fetch(`${api}/produtos`, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(produto)
+
+            });
+
+            document.getElementById("nome").value = "";
+            document.getElementById("preco").value = "";
+
+            carregarProdutos();
+        }
+
+        carregarProdutos();
+
+    </script>
+
+</body>
+</html>

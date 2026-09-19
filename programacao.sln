@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiMysql", "ApiMysql\ApiMysql.csproj", "{F3B5C6F0-50CA-8E8A-7897-17CBE21FF453}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiMysql (1)", "ApiMysql (1)", "{FB482A6B-6D1D-6F97-C596-B27BD15866EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "apimysql", "ApiMysql\apimysql\apimysql.csproj", "{35E4095C-5A79-9DFE-156B-F7B04F20BA16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3B5C6F0-50CA-8E8A-7897-17CBE21FF453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3B5C6F0-50CA-8E8A-7897-17CBE21FF453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3B5C6F0-50CA-8E8A-7897-17CBE21FF453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3B5C6F0-50CA-8E8A-7897-17CBE21FF453}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35E4095C-5A79-9DFE-156B-F7B04F20BA16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35E4095C-5A79-9DFE-156B-F7B04F20BA16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35E4095C-5A79-9DFE-156B-F7B04F20BA16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35E4095C-5A79-9DFE-156B-F7B04F20BA16}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{35E4095C-5A79-9DFE-156B-F7B04F20BA16} = {FB482A6B-6D1D-6F97-C596-B27BD15866EC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2C6610F1-513D-4455-A642-5E6D1820589B}
+	EndGlobalSection
+EndGlobal
